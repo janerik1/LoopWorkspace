@@ -5,6 +5,17 @@ on:
 
 jobs:
   build:
-    uses: LoopKit/LoopWorkspace/.github/workflows/browser-build.yml@main
-    with:
-      team-id: ${{ secrets.TEAMID }}
+    runs-on: macos-13
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Xcode Tools
+        run: |
+          sudo xcode-select --switch /Applications/Xcode_15.2.app
+          sudo xcodebuild -license accept
+
+      - name: Build Loop
+        uses: LoopKit/LoopWorkspace/.github/actions/browser-build@main
+        with:
+          team-id: ${{ secrets.TEAMID }}
