@@ -10,12 +10,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Xcode Tools
-        run: |
-          sudo xcode-select --switch /Applications/Xcode_15.2.app
-          sudo xcodebuild -license accept
+      - name: Select Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Install Dependencies
+        run: bundle install
 
       - name: Build Loop
-        uses: LoopKit/LoopWorkspace/.github/actions/browser-build@main
-        with:
-          team-id: ${{ secrets.TEAMID }}
+        run: xcodebuild -workspace LoopWorkspace.xcworkspace -scheme LoopWorkspace -destination generic/platform=iOS
+        env:
+          DEVELOPMENT_TEAM: ${{ secrets.TEAMID }}
