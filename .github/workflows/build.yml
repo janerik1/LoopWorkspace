@@ -1,0 +1,10 @@
+name: Build Loop
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: LoopKit/LoopWorkspace/.github/workflows/browser-build.yml@main
+    with:
+      team-id: ${{ secrets.TEAMID }}
