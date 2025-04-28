@@ -20,6 +20,6 @@ jobs:
         run: bundle install
 
       - name: Build Loop
-        run: xcodebuild -workspace LoopWorkspace.xcworkspace -scheme LoopWorkspace -destination generic/platform=iOS
+      - run: xcodebuild -workspace LoopWorkspace.xcworkspace -scheme Loop -destination generic/platform=iOS
         env:
           DEVELOPMENT_TEAM: ${{ secrets.TEAMID }}
